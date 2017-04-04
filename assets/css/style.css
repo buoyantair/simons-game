@@ -16,6 +16,10 @@ body, html {
   max-width: 20em;
   max-height: 20em; }
 
+.row {
+  width: 20em;
+  height: 10em; }
+
 .box {
   background: cyan;
   min-width: 10em;
