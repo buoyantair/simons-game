@@ -10,11 +10,11 @@ html
     body.row.align-items-center
         .game
             .row
-                .box
-                .box
+                .box#red(onClick="userStateListener('red')")
+                .box#blue(onClick="userStateListener('blue')")
             .row
-                .box
-                .box
+                .box#green(onClick="userStateListener('green')")
+                .box#yellow(onClick="userStateListener('yellow')")
         script(src="assets/js/jquery-3.2.0.min.js")
         script(src="assets/js/tether.min.js")
         script(src="assets/js/bootstrap.js")

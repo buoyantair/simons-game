@@ -11,18 +11,35 @@ body, html {
 .game {
   margin: auto;
   background: lightgreen;
+  padding: 0;
   min-width: 20em;
   min-height: 20em;
   max-width: 20em;
   max-height: 20em; }
 
 .row {
+  margin: 0;
+  padding: 0;
   width: 20em;
   height: 10em; }
 
 .box {
+  margin: 0;
+  padding: 0;
   background: cyan;
   min-width: 10em;
   min-height: 10em; }
+
+#blue {
+  background: blue; }
+
+#red {
+  background: red; }
+
+#green {
+  background: green; }
+
+#yellow {
+  background: yellow; }
 
 /*# sourceMappingURL=style.css.map */
