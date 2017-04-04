@@ -1,53 +1,54 @@
-
 var colors = ["red", "blue", "green", "yellow"];
 var currentState = [];
 var userState = [];
-var generateState = function(){
+var generateState = function() {
   var randomColor = colors[Math.floor(Math.random() * colors.length)];
   currentState.push(randomColor);
 }
 var gameStep = 0;
 var maxStep = 5;
-var resetState = function(){
+var resetState = function() {
   currentState = [];
-  userState= [];
+  userState = [];
   gameStep = 0;
 }
 
 var hintShowed = false;
 
-var userStateListener = function(color){
-  if(hintShowed === true){
-    userState.push(color);
-    console.log('User : ' +userState )
-    var mat = checkMatch(currentState, userState);
-    isCorrect(mat);
+var userStateListener = function(color) {
+  if (hintShowed === true) {
     hintShowed = false;
+    userState.push(color);
+    console.log('User : ' + userState)
+    var mat = checkMatch(currentState, userState);
+    console.log(mat);
+    isCorrect(mat);
+    console.log("ba ba black sheep")
   }
 }
 
-var renderState = function(){
-  if (hintShowed === false){
-    console.log('User : ' +currentState )
+var renderState = function() {
+  if (hintShowed === false) {
+    console.log('User : ' + currentState);
     hintShowed = true;
   }
 }
 
 
-var checkMatch = function(currentState, userState){
+var checkMatch = function(currentState, userState) {
   var match = false
-  for(var i=0; i < currentState.length; i++){
-    if(currentState[i] === userState[i]){
+  for (var i = 0; i < currentState.length; i++) {
+    if (currentState[i] === userState[i]) {
       match = true;
-    } else{
+    } else {
       match = false;
     }
   }
   return match;
 }
 
-var isCorrect = function(bool){
-  if(bool){
+var isCorrect = function(bool) {
+  if (bool) {
     gameStep++;
     initialPrompt(true);
   } else {
@@ -56,15 +57,15 @@ var isCorrect = function(bool){
   }
 }
 
-var initialPrompt = function(recursive){
-  if(recursive === false){
+var initialPrompt = function(recursive) {
+  if (recursive === false) {
     generateState();
     renderState();
-  } else if(recursive === true) {
-    if(gameStep < maxStep){
+  } else if (recursive === true) {
+    if (gameStep < maxStep) {
       generateState();
       renderState();
-    } else{
+    } else {
       resetState();
       initialPrompt(false);
     }
