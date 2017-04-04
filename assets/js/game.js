@@ -14,37 +14,23 @@ var resetState = function(){
   gameStep = 0;
 }
 
-var rendered = false;
+var hintShowed = false;
 
 var userStateListener = function(color){
-  if(rendered === true){
+  if(hintShowed === true){
     userState.push(color);
-    console.log(userState);
+    console.log('User : ' +userState )
     var mat = checkMatch(currentState, userState);
     isCorrect(mat);
+    hintShowed = false;
   }
 }
 
-var renderState = function(msg){
-  for(var i =0; i < currentState.length; i++){
-    setInterval(function(){
-      if(currentState[i] === 'red'){
-        document.getElementById(currentState[i]).style.background = '#EF476F';
-      } else if(currentState[i] === 'blue'){
-        document.getElementById(currentState[i]).style.background = '#048BA8';
-      } else if(currentState[i] === 'green'){
-        document.getElementById(currentState[i]).style.background = '#06D6A0';
-      } else if(currentState[i] === 'yellow'){
-        document.getElementById(currentState[i]).style.background = '#FFD166';
-      }
-    }, 1000)
+var renderState = function(){
+  if (hintShowed === false){
+    console.log('User : ' +currentState )
+    hintShowed = true;
   }
-  setTimeout(function(){
-    for(var i =0; i < currentState.length; i++){
-      document.getElementById(currentState[i]).style.background = currentState[i];
-    }
-  }, 2000)
-  rendered = true;
 }
 
 
