@@ -6,44 +6,51 @@ var generateState = function() {
   currentState.push(randomColor);
 }
 var gameStep = 0;
-var maxStep = 5;
+var maxStep = 20;
 var resetState = function() {
   currentState = [];
   userState = [];
   gameStep = 0;
 }
 
-var hintShowed = false;
-
-var userStateListener = function(color) {
-  if (hintShowed === true) {
-    hintShowed = false;
-    userState.push(color);
-    console.log('User : ' + userState)
-    var mat = checkMatch(currentState, userState);
-    console.log(mat);
-    isCorrect(mat);
-    console.log("ba ba black sheep")
+var resetBtns = function() {
+  for (var i = 0; i < colors[i].length; i++) {
+    document.getElementById(colors[i]).disabled = false;
   }
+}
+
+var mutateUserState = function(element) {
+  userState.push(element.id);
+  var isMatched = checkMatch(currentState, userState);
+  isCorrect(isMatched);
+  element.disabled = true;
 }
 
 var renderState = function() {
-  if (hintShowed === false) {
-    console.log('User : ' + currentState);
-    hintShowed = true;
+  for (var i = 0; i < currentState.length; i++) {
+    document.getElementById(currentState[i]).style.background = 'white';
+    setTimeout(function() {
+      document.getElementById(currentState[i]).style.background = currentState[i];
+    }, 1000)
   }
 }
+
 
 
 var checkMatch = function(currentState, userState) {
   var match = false
-  for (var i = 0; i < currentState.length; i++) {
-    if (currentState[i] === userState[i]) {
-      match = true;
-    } else {
-      match = false;
+  if (currentState.length === userState.length) {
+    for (var i = 0; i < currentState.length; i++) {
+      if (currentState[i] === userState[i]) {
+        match = true;
+      } else {
+        match = false;
+      }
     }
+  } else {
+    match = false;
   }
+
   return match;
 }
 
@@ -52,7 +59,7 @@ var isCorrect = function(bool) {
     gameStep++;
     initialPrompt(true);
   } else {
-    userState.pop();
+    userState = [];
     renderState();
   }
 }
