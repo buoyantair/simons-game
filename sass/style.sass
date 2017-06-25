@@ -1,0 +1,110 @@
+$board-size: 400px
+
+
+=flex($direction, $position)
+	display: flex
+	flex-flow: $direction
+	justify-content: $position
+
+=size($width, $height)
+	width: $width
+	height: $height
+
+button
+	border: none
+	background: #FFF
+body
+	+flex(column wrap, center)
+	+size(100%, 100vh)
+	overflow: hidden
+	background: #5C258D  /* fallback for old browsers */
+	background: -webkit-linear-gradient(30deg, #4389A2, #5C258D)  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(30deg, #4389A2, #5C258D) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	
+
+	
+.board
+	+size($board-size, $board-size)
+	background: none
+	overflow: hidden
+	margin: auto
+	border-radius: 5px
+	.row
+		+flex(row wrap, space-around)
+		+size(100%, $board-size/2)
+		.box
+			+size($board-size/2, $board-size/2)
+			transition: all .1s
+			opacity: .7
+		.box:hover
+			transform: scale(.95)
+			border-radius: 5px
+			cursor: pointer
+		.box:active
+			opacity: 1
+#blue
+	background: #47A7E8
+#red 
+	background: #E8418A
+#yellow
+	background: #FFD769
+#green
+	background: #55E86E
+
+.restart, .step,.strict
+	position: absolute
+	+size(50px, 50px)
+	background: #FFF
+	top: 0
+	left: 0
+	z-index: 100
+	+flex(column wrap, center)
+	text-align: center
+	color: #999
+	font-size: 15px
+.restart
+	top: 50px
+	left: 0
+.strict
+	top: 100px
+	left: 0
+.strict.toggled
+	background: #5C258D
+	color: #FFF
+.modal
+	position: absolute
+	+size(100%, 300px)
+	background: #FFF
+	bottom: -100%
+	z-index: 300
+	+flex(column wrap, center)
+	text-align: center
+	color: #FFF
+	font-size: 25px
+	transition: all .5s
+.modal.visible
+	bottom: 0
+.modal.wrong
+	background: #CC3363
+.modal.win
+	background: #88D18A
+
+.startscreen
+	display: none
+
+.startscreen.visible
+	position: absolute
+	+size(100%, 100vh)
+	background: #5C258D  /* fallback for old browsers */
+	background: -webkit-linear-gradient(30deg, lighten(#4389A2, 25%), lighten(#5C258D, 25%))  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(30deg, lighten(#4389A2, 25%), lighten(#5C258D, 25%)) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	top: 0
+	left: 0
+	z-index: 200
+	+flex(column wrap, center)
+	text-align: center
+	color: #FFF
+	font-size: 25px
+	transition: all .5s
+	button
+		height: 100px 

@@ -1,0 +1,151 @@
+let colors = ["red", "blue", "green", "yellow"];
+let currentState = [];
+let userState = [];
+let renderDelay = 1000;
+let listening = false;
+let playing = false;
+let strict = false;
+let sounds = {
+	push: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3",
+	render: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3",
+	click: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
+}
+let generateState = function(){
+  currentState.push(colors[Math.floor(Math.random() * colors.length)]);
+}
+
+let gameStep = 0;
+let maxStep = 20;
+
+let play = function(obj, src){
+	new Audio(src).play();
+}
+
+let resetState = function(){
+	document.querySelector(".step").innerText = 1;
+	listening = false;
+  currentState = [];
+  userState= [];
+  gameStep = 0;
+	renderDelay = 1000;
+}
+
+let userStateListener = function(color){
+	if(listening === true){
+		play($("#sound"), sounds.push);
+		userState.push(color);
+		if(userState.length == currentState.length){
+			listening = false;
+			let matched = checkMatch();
+			isCorrect(matched);
+		} else if(userState.length > currentState.length){
+			listening = false;
+			userState= [];
+		}
+	} else {
+		console.log(userState);
+	}
+}
+
+let blimp = function(box, sound){
+	if(playing){
+		play($("#sound"), sound)
+		box.css({opacity: 1});
+		setTimeout(()=>{
+			box.css({opacity: 0.7});
+		}, 1000)
+	}
+}
+
+let renderState = function(msg){
+	if (playing){
+		userState = [];
+		//alert(currentState);
+		for(let color in currentState){
+			setTimeout(()=>{
+				blimp($("#" + currentState[color]), sounds.render)
+			}, renderDelay)
+			renderDelay += 1500;
+		}	
+		renderDelay = 1000;
+		setTimeout(()=>{
+			listening = true;
+		}, renderDelay * currentState.length)
+	}
+	
+}
+
+let toggleModal = function(text, mood, next){
+	$(".modal").text(text);
+	
+	$(".modal").addClass(`visible ${mood}`);
+	setTimeout(()=>{
+		$(".modal").removeClass("visible");
+		if(next){
+			next();
+		}
+	}, 1000)
+}
+
+
+let checkMatch = function(){
+  let match = false
+  for(let i=0; i < currentState.length; i++){
+    if(currentState[i] === userState[i]){
+      match = true;
+    } else{
+      match = false;
+    }
+  }
+  return match;
+}
+
+let isCorrect = function(bool){
+  if(bool){
+    gameStep++;
+		document.querySelector(".step").innerText = gameStep+1;
+    initialPrompt(true);
+  } else if(!strict) {
+		toggleModal("Ops! try again!", "wrong", renderState);
+  } else if(strict){
+		initialPrompt(false);
+	}
+}
+
+let initialPrompt = function(recursive){
+  if(recursive === false){
+		playing = true;
+		$('.startscreen').removeClass('visible');
+		resetState();
+    generateState();
+    renderState();
+  } else if(recursive === true) {
+    if(gameStep < maxStep){
+      generateState();
+      renderState();
+    } else{
+      resetState();
+      playing = false;
+			$('.startscreen').addClass('visible');
+			toggleModal("Awesome! You won!", "win");
+    }
+  }
+}
+
+for(let box in colors){
+	document.querySelector("#"+colors[box]).addEventListener("mousedown", ()=>{
+		play($("#sound"), sounds.click)
+		$("#" + colors[box]).css({opacity: 1});
+	})
+	document.querySelector("#"+colors[box]).addEventListener("mouseup", ()=>{
+		$("#" + colors[box]).css({opacity: 0.7});
+	})
+}
+$('.strict').on('click', ()=>{
+	strict = !strict;
+	if(strict){
+		$('.strict').addClass('toggled');
+	} else {
+		$('.strict').removeClass('toggled');
+	}
+})

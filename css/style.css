@@ -1,0 +1,147 @@
+button {
+  border: none;
+  background: #FFF;
+}
+
+body {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #5C258D;
+  background: -webkit-linear-gradient(30deg, #4389A2, #5C258D);
+  background: linear-gradient(30deg, #4389A2, #5C258D);
+}
+
+.board {
+  width: 400px;
+  height: 400px;
+  background: none;
+  overflow: hidden;
+  margin: auto;
+  border-radius: 5px;
+}
+.board .row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 100%;
+  height: 200px;
+}
+.board .row .box {
+  width: 200px;
+  height: 200px;
+  transition: all 0.1s;
+  opacity: 0.7;
+}
+.board .row .box:hover {
+  transform: scale(0.95);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.board .row .box:active {
+  opacity: 1;
+}
+
+#blue {
+  background: #47A7E8;
+}
+
+#red {
+  background: #E8418A;
+}
+
+#yellow {
+  background: #FFD769;
+}
+
+#green {
+  background: #55E86E;
+}
+
+.restart, .step, .strict {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #FFF;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+}
+
+.restart {
+  top: 50px;
+  left: 0;
+}
+
+.strict {
+  top: 100px;
+  left: 0;
+}
+
+.strict.toggled {
+  background: #5C258D;
+  color: #FFF;
+}
+
+.modal {
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  background: #FFF;
+  bottom: -100%;
+  z-index: 300;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  text-align: center;
+  color: #FFF;
+  font-size: 25px;
+  transition: all 0.5s;
+}
+
+.modal.visible {
+  bottom: 0;
+}
+
+.modal.wrong {
+  background: #CC3363;
+}
+
+.modal.win {
+  background: #88D18A;
+}
+
+.startscreen {
+  display: none;
+}
+
+.startscreen.visible {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: #5C258D;
+  background: -webkit-linear-gradient(30deg, #92c1d2, #9c5dd4);
+  background: linear-gradient(30deg, #92c1d2, #9c5dd4);
+  top: 0;
+  left: 0;
+  z-index: 200;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  text-align: center;
+  color: #FFF;
+  font-size: 25px;
+  transition: all 0.5s;
+}
+.startscreen.visible button {
+  height: 100px;
+}

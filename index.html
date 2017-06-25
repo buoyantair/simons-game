@@ -1,1 +1,41 @@
-<html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/><title>Simon's Game by @buoyantair</title><link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"/><link rel="stylesheet" type="text/css" href="assets/css/bootstrap-grid.min.css"/><link rel="stylesheet" type="text/css" href="assets/css/bootstrap-reboot.min.css"/><link rel="stylesheet" type="text/css" href="assets/css/style.css"/></head><body class="row align-items-center"><div class="game"><div class="row"><button class="box" id="red" onClick="mutateUserState(this)"></button><button class="box" id="blue" onClick="mutateUserState(this)"></button></div><div class="row"><button class="box" id="green" onClick="mutateUserState(this)"></button><button class="box" id="yellow" onClick="mutateUserState(this)"></button></div></div><script src="assets/js/game.js"></script></body></html>
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Simons game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  
+<div class="modal"></div>
+<div class="step">1</div>
+<div class="strict">S</div>
+<button class="restart" onClick="initialPrompt(false)">R</button>
+<div class="startscreen visible">
+  <h1>Simons game </h1>
+  <button onClick="initialPrompt(false)">Start Game</button>
+</div>
+<div class="board">
+  <div class="row">
+    <div class="box" id="blue" onclick="userStateListener('blue')"></div>
+    <div class="box" id="green" onclick="userStateListener('green')"></div>
+  </div>
+  <div class="row">
+    <div class="box" id="red" onclick="userStateListener('red')"></div>
+    <div class="box" id="yellow" onclick="userStateListener('yellow')"></div>
+  </div>
+</div>
+<audio id="sound"></audio>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>

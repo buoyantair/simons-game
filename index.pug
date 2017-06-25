@@ -1,18 +1,15 @@
-html
-    head
-        meta(charset = "utf-8")
-        meta(name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
-        title Simon's Game by @buoyantair
-        link(rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css")
-        link(rel="stylesheet" type="text/css" href="assets/css/bootstrap-grid.min.css")
-        link(rel="stylesheet" type="text/css" href="assets/css/bootstrap-reboot.min.css")
-        link(rel="stylesheet" type="text/css" href="assets/css/style.css")
-    body.row.align-items-center
-        .game
-            .row
-                button.box#red(onClick="mutateUserState(this)")
-                button.box#blue(onClick="mutateUserState(this)")
-            .row
-                button.box#green(onClick="mutateUserState(this)")
-                button.box#yellow(onClick="mutateUserState(this)")
-        script(src="assets/js/game.js")
+.modal
+.step 1
+.strict S
+button.restart(onClick="initialPrompt(false)") R
+.startscreen.visible
+	h1 Simons game 
+	button(onClick="initialPrompt(false)") Start Game
+.board
+	.row
+		.box#blue(onclick="userStateListener('blue')")
+		.box#green(onclick="userStateListener('green')")
+	.row
+		.box#red(onclick="userStateListener('red')")
+		.box#yellow(onclick="userStateListener('yellow')")
+audio#sound
